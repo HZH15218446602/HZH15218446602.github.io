@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SpringBoot | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SpringBootSpringBoot项目的搭建：在线创建 ：https:&#x2F;&#x2F;start.spring.io&#x2F; 步骤： 打开网站。选择Maven project。选择java。选择SpringBoot版本。填写Group和Artifact。选择打包类型为jar。选择JDK版本为8。添加Spring Web依赖。 创建出来带有启动类和application.yml。 SpringBoot开发JSO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot">
+<meta property="og:url" content="http://example.com/2022/04/06/SpringBoot/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SpringBootSpringBoot项目的搭建：在线创建 ：https:&#x2F;&#x2F;start.spring.io&#x2F; 步骤： 打开网站。选择Maven project。选择java。选择SpringBoot版本。填写Group和Artifact。选择打包类型为jar。选择JDK版本为8。添加Spring Web依赖。 创建出来带有启动类和application.yml。 SpringBoot开发JSO">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-06T00:53:45.000Z">
+<meta property="article:modified_time" content="2022-04-06T00:54:52.388Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SpringBoot" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/SpringBoot/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpringBoot
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h2 id="SpringBoot项目的搭建："><a href="#SpringBoot项目的搭建：" class="headerlink" title="SpringBoot项目的搭建："></a>SpringBoot项目的搭建：</h2><p>在线创建 ：<a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io/</a></p>
+<p>步骤：</p>
+<p>打开网站。<br>选择Maven project。<br>选择java。<br>选择SpringBoot版本。<br>填写Group和Artifact。<br>选择打包类型为jar。<br>选择JDK版本为8。<br>添加Spring Web依赖。</p>
+<p>创建出来带有启动类和application.yml。</p>
+<h2 id="SpringBoot开发JSON接口："><a href="#SpringBoot开发JSON接口：" class="headerlink" title="SpringBoot开发JSON接口："></a>SpringBoot开发JSON接口：</h2><p>步骤：</p>
+<p>在controller包的Videocontroller类。<br>类上加@RestController注解和@RequestMapping注解。<br>类中定义一个list方法，由@RequestMapping注解换成@GetMapping注解。<br>而且需要调用service包的service接口的实现类，所以定义一个成员变量并且在这个成员变量上加上@Autowired注解。<br>返回数据。</p>
+<p>在service包的service接口，写上方法体。<br>在service包的service接口的实现类，写上方法体实现并且在类上需要加上@Service。而且需要调用dao包的dao类，所以定义一个成员变量<br>并且在这个成员变量上加上@Autowired注解。</p>
+<p>在dao包的dao类，写上方法并且在类上需要加上@Component。</p>
+<p>应用：访问路径为<a target="_blank" rel="noopener" href="http://localhost:8080/controller%E7%B1%BB%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84/%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84%E3%80%82">http://localhost:8080/controller类上的RequestMapping括号内的/类中方法上的RequestMapping括号内的。</a></p>
+<h2 id="SpringBoot的静态文件："><a href="#SpringBoot的静态文件：" class="headerlink" title="SpringBoot的静态文件："></a>SpringBoot的静态文件：</h2><p>步骤：</p>
+<p>在resource下创建文件并且创建对应的html。<br>这些文件的资源有访问权限。<br>在application.properties设置文件的资源访问权限spring.resources.static-locations。rces.static-locations = classpath:/METAINF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/。</p>
+<p>应用：访问静态文件只需要<a target="_blank" rel="noopener" href="http://localhost:8080/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0.html%E3%80%82">http://localhost:8080/静态文件名称.html。</a><br>如果有放子目录，<a target="_blank" rel="noopener" href="http://localhost:8080/%E5%AD%90%E7%9B%AE%E5%BD%95/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0.html%E3%80%82">http://localhost:8080/子目录/静态文件名称.html。</a></p>
+<h2 id="SpringBoot的实体类与配置文件映射："><a href="#SpringBoot的实体类与配置文件映射：" class="headerlink" title="SpringBoot的实体类与配置文件映射："></a>SpringBoot的实体类与配置文件映射：</h2><p>步骤：</p>
+<p>新建一个配置文件pay.properties。<br>在config包下新建一个WXconfig配置类，类上加上@Configuration和@PropertySource(value=”classpath:pay.properties”)注解，在成员变量上加上@Value(“${配置文件的key}”)注解。<br>在controller包下新建一个TestController类,然后在类中需要用到就直接@Autowired注入WXconfig类的对象，获取成员变量与值。,然后前端请求就能拿到。</p>
+<h2 id="SpringBoot的全局异常："><a href="#SpringBoot的全局异常：" class="headerlink" title="SpringBoot的全局异常："></a>SpringBoot的全局异常：</h2><p>步骤：</p>
+<p>在handler包下创建一个CustomExtHandler类，类上加上@RestControllerAdvice注解，类中定义一个方法handlerException，方法上加上@ExceptionHandler(value=Exception.class)注解。</p>
+<h2 id="SpringBoot的过滤器："><a href="#SpringBoot的过滤器：" class="headerlink" title="SpringBoot的过滤器："></a>SpringBoot的过滤器：</h2><p>步骤：</p>
+<p>在启动类加上 @ServletComponentScan注解。<br>在filter包新建LoginFilter类实现Filter接口，重写init、doFilter、destroy方法，类上加上@WebFilter 注解，@WebFilter 注解括号内配置拦截路径以及名称。</p>
+<h2 id="SpringBoot的监听器："><a href="#SpringBoot的监听器：" class="headerlink" title="SpringBoot的监听器："></a>SpringBoot的监听器：</h2><p>步骤：</p>
+<p>在listener包新建一个ApplicationListener类实现ServletContextListener接口接着重写contextInitialized和contextDestroyed方法。需要在类上加上@WebListener注解。</p>
+<h2 id="SpringBoot的拦截器："><a href="#SpringBoot的拦截器：" class="headerlink" title="SpringBoot的拦截器："></a>SpringBoot的拦截器：</h2><p>步骤：</p>
+<p>在interceptor包，先建一个拦截器配置类CustomWebMvcConfigurer实现WebMvcConfigurer接口接着重写addInterceptors方法作用就是可以注册拦截器和配置拦截路径，然后在CustomWebMvcConfigurer类上加上@Configuration注解，然后在类中定义一个getLoginIntercepter方法而且方法上加上@Bean注解。<br>再建拦截器类LoginIntercepter实现HandlerInterceptor接口然后重写preHandle、postHandle、afterComletion方法。</p>
+<h2 id="SpringBoot的定时任务："><a href="#SpringBoot的定时任务：" class="headerlink" title="SpringBoot的定时任务："></a>SpringBoot的定时任务：</h2><p>步骤：</p>
+<p>在启动类上加上 @EnableScheduling注解。<br>在schedule包下新建VideoOrderTask类，加上@Component注解，类的方法上加上 @Scheduled(fixedRate=2000) 注解。</p>
+<p>注意：</p>
+<p>@Scheduled注解括号内的值为：</p>
+<p>cron 定时任务表达式 @Scheduled(cron=”*/1 * * * * *”) 表示每秒<br>crontab ⼯具 <a target="_blank" rel="noopener" href="https://tool.lu/crontab/">https://tool.lu/crontab/</a><br>fixedRate: 定时多久执⾏⼀次（上⼀次开始执⾏时间点后xx秒再次执⾏；）<br>fixedDelay: 上⼀次执⾏结束时间点后xx秒再次执⾏</p>
+<h2 id="SpringBoot的异步任务："><a href="#SpringBoot的异步任务：" class="headerlink" title="SpringBoot的异步任务："></a>SpringBoot的异步任务：</h2><p>步骤：</p>
+<p>在启动类上加上@EnableAsync注解。<br>在task包下创建AsyncTask类，类上加上@Component和@Async注解。<br>在controller包下的TestController创建testAsync方法。</p>
+<p>注意：</p>
+<p>返回值类型为Future&lt;返回值数据类型&gt;和return AsyncResult&lt;返回值数据类型&gt;(内容)。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/SpringBoot/" data-id="cl1muz31i0002pguofx2mfqjm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/06/MyBatis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MyBatis</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/06/SpringBoot/">SpringBoot</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/MyBatis/">MyBatis</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/Spring/">Spring</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

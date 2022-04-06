@@ -5,13 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>MyBatis | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="MyBatisMyBatis项目的创建步骤： 创建Maven项目。 导入依赖。 1234567891011121314&lt;dependencies&gt; &lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;org.mybatis&#x2F;mybatis --&gt; &lt;dependency&gt; &lt;groupId&gt;org.mybatis&lt;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis">
+<meta property="og:url" content="http://example.com/2022/04/06/MyBatis/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MyBatisMyBatis项目的创建步骤： 创建Maven项目。 导入依赖。 1234567891011121314&lt;dependencies&gt; &lt;!-- https:&#x2F;&#x2F;mvnrepository.com&#x2F;artifact&#x2F;org.mybatis&#x2F;mybatis --&gt; &lt;dependency&gt; &lt;groupId&gt;org.mybatis&lt;&#x2F;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-06T00:53:32.000Z">
+<meta property="article:modified_time" content="2022-04-06T00:54:20.346Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -62,76 +66,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-SpringBoot" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/04/06/SpringBoot/" class="article-date">
-  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/06/SpringBoot/">SpringBoot</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h2 id="SpringBoot项目的搭建："><a href="#SpringBoot项目的搭建：" class="headerlink" title="SpringBoot项目的搭建："></a>SpringBoot项目的搭建：</h2><p>在线创建 ：<a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io/</a></p>
-<p>步骤：</p>
-<p>打开网站。<br>选择Maven project。<br>选择java。<br>选择SpringBoot版本。<br>填写Group和Artifact。<br>选择打包类型为jar。<br>选择JDK版本为8。<br>添加Spring Web依赖。</p>
-<p>创建出来带有启动类和application.yml。</p>
-<h2 id="SpringBoot开发JSON接口："><a href="#SpringBoot开发JSON接口：" class="headerlink" title="SpringBoot开发JSON接口："></a>SpringBoot开发JSON接口：</h2><p>步骤：</p>
-<p>在controller包的Videocontroller类。<br>类上加@RestController注解和@RequestMapping注解。<br>类中定义一个list方法，由@RequestMapping注解换成@GetMapping注解。<br>而且需要调用service包的service接口的实现类，所以定义一个成员变量并且在这个成员变量上加上@Autowired注解。<br>返回数据。</p>
-<p>在service包的service接口，写上方法体。<br>在service包的service接口的实现类，写上方法体实现并且在类上需要加上@Service。而且需要调用dao包的dao类，所以定义一个成员变量<br>并且在这个成员变量上加上@Autowired注解。</p>
-<p>在dao包的dao类，写上方法并且在类上需要加上@Component。</p>
-<p>应用：访问路径为<a target="_blank" rel="noopener" href="http://localhost:8080/controller%E7%B1%BB%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84/%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84%E3%80%82">http://localhost:8080/controller类上的RequestMapping括号内的/类中方法上的RequestMapping括号内的。</a></p>
-<h2 id="SpringBoot的静态文件："><a href="#SpringBoot的静态文件：" class="headerlink" title="SpringBoot的静态文件："></a>SpringBoot的静态文件：</h2><p>步骤：</p>
-<p>在resource下创建文件并且创建对应的html。<br>这些文件的资源有访问权限。<br>在application.properties设置文件的资源访问权限spring.resources.static-locations。rces.static-locations = classpath:/METAINF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/。</p>
-<p>应用：访问静态文件只需要<a target="_blank" rel="noopener" href="http://localhost:8080/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0.html%E3%80%82">http://localhost:8080/静态文件名称.html。</a><br>如果有放子目录，<a target="_blank" rel="noopener" href="http://localhost:8080/%E5%AD%90%E7%9B%AE%E5%BD%95/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0.html%E3%80%82">http://localhost:8080/子目录/静态文件名称.html。</a></p>
-<h2 id="SpringBoot的实体类与配置文件映射："><a href="#SpringBoot的实体类与配置文件映射：" class="headerlink" title="SpringBoot的实体类与配置文件映射："></a>SpringBoot的实体类与配置文件映射：</h2><p>步骤：</p>
-<p>新建一个配置文件pay.properties。<br>在config包下新建一个WXconfig配置类，类上加上@Configuration和@PropertySource(value=”classpath:pay.properties”)注解，在成员变量上加上@Value(“${配置文件的key}”)注解。<br>在controller包下新建一个TestController类,然后在类中需要用到就直接@Autowired注入WXconfig类的对象，获取成员变量与值。,然后前端请求就能拿到。</p>
-<h2 id="SpringBoot的全局异常："><a href="#SpringBoot的全局异常：" class="headerlink" title="SpringBoot的全局异常："></a>SpringBoot的全局异常：</h2><p>步骤：</p>
-<p>在handler包下创建一个CustomExtHandler类，类上加上@RestControllerAdvice注解，类中定义一个方法handlerException，方法上加上@ExceptionHandler(value=Exception.class)注解。</p>
-<h2 id="SpringBoot的过滤器："><a href="#SpringBoot的过滤器：" class="headerlink" title="SpringBoot的过滤器："></a>SpringBoot的过滤器：</h2><p>步骤：</p>
-<p>在启动类加上 @ServletComponentScan注解。<br>在filter包新建LoginFilter类实现Filter接口，重写init、doFilter、destroy方法，类上加上@WebFilter 注解，@WebFilter 注解括号内配置拦截路径以及名称。</p>
-<h2 id="SpringBoot的监听器："><a href="#SpringBoot的监听器：" class="headerlink" title="SpringBoot的监听器："></a>SpringBoot的监听器：</h2><p>步骤：</p>
-<p>在listener包新建一个ApplicationListener类实现ServletContextListener接口接着重写contextInitialized和contextDestroyed方法。需要在类上加上@WebListener注解。</p>
-<h2 id="SpringBoot的拦截器："><a href="#SpringBoot的拦截器：" class="headerlink" title="SpringBoot的拦截器："></a>SpringBoot的拦截器：</h2><p>步骤：</p>
-<p>在interceptor包，先建一个拦截器配置类CustomWebMvcConfigurer实现WebMvcConfigurer接口接着重写addInterceptors方法作用就是可以注册拦截器和配置拦截路径，然后在CustomWebMvcConfigurer类上加上@Configuration注解，然后在类中定义一个getLoginIntercepter方法而且方法上加上@Bean注解。<br>再建拦截器类LoginIntercepter实现HandlerInterceptor接口然后重写preHandle、postHandle、afterComletion方法。</p>
-<h2 id="SpringBoot的定时任务："><a href="#SpringBoot的定时任务：" class="headerlink" title="SpringBoot的定时任务："></a>SpringBoot的定时任务：</h2><p>步骤：</p>
-<p>在启动类上加上 @EnableScheduling注解。<br>在schedule包下新建VideoOrderTask类，加上@Component注解，类的方法上加上 @Scheduled(fixedRate=2000) 注解。</p>
-<p>注意：</p>
-<p>@Scheduled注解括号内的值为：</p>
-<p>cron 定时任务表达式 @Scheduled(cron=”*/1 * * * * *”) 表示每秒<br>crontab ⼯具 <a target="_blank" rel="noopener" href="https://tool.lu/crontab/">https://tool.lu/crontab/</a><br>fixedRate: 定时多久执⾏⼀次（上⼀次开始执⾏时间点后xx秒再次执⾏；）<br>fixedDelay: 上⼀次执⾏结束时间点后xx秒再次执⾏</p>
-<h2 id="SpringBoot的异步任务："><a href="#SpringBoot的异步任务：" class="headerlink" title="SpringBoot的异步任务："></a>SpringBoot的异步任务：</h2><p>步骤：</p>
-<p>在启动类上加上@EnableAsync注解。<br>在task包下创建AsyncTask类，类上加上@Component和@Async注解。<br>在controller包下的TestController创建testAsync方法。</p>
-<p>注意：</p>
-<p>返回值类型为Future&lt;返回值数据类型&gt;和return AsyncResult&lt;返回值数据类型&gt;(内容)。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/06/SpringBoot/" data-id="cl1muz31i0002pguofx2mfqjm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MyBatis" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-MyBatis" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/04/06/MyBatis/" class="article-date">
   <time datetime="2022-04-06T00:53:32.000Z" itemprop="datePublished">2022-04-06</time>
@@ -144,8 +79,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/06/MyBatis/">MyBatis</a>
+    <h1 class="article-title" itemprop="name">
+      MyBatis
     </h1>
   
 
@@ -187,110 +122,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Spring" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/04/06/Spring/" class="article-date">
-  <time datetime="2022-04-06T00:53:21.000Z" itemprop="datePublished">2022-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2022/04/06/SpringBoot/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/06/Spring/">Spring</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h2 id="Spring项目搭建"><a href="#Spring项目搭建" class="headerlink" title="Spring项目搭建"></a>Spring项目搭建</h2><p>步骤：</p>
-<p>创建Maven项目。<br>导入依赖。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">https://mvnrepository.com/artifact/org.springframework/spring-context --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">https://mvnrepository.com/artifact/org.springframework/spring-core --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">https://mvnrepository.com/artifact/org.springframework/spring-beans --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-beans<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>写applicationContext.xml。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag"> https://www.springframework.org/schema/beans/springbeans.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>获取bean对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main函数。</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        <span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> (UserService)applicationContext.getBean(<span class="string">&quot;userserviceimpl&quot;</span>);</span><br><span class="line">       userService.kaya();</span><br></pre></td></tr></table></figure>
-
-<h2 id="Spring注解项目搭建"><a href="#Spring注解项目搭建" class="headerlink" title="Spring注解项目搭建"></a>Spring注解项目搭建</h2><p>步骤：</p>
-<p>创建Maven项目。<br>导入依赖。<br>写一个主函数类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"> <span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span></span><br><span class="line"><span class="title class_">AnnotationConfigApplicationContext</span>();</span><br><span class="line"> <span class="comment">//扫描指定的包，包括⼦包</span></span><br><span class="line"> context.scan(<span class="string">&quot;net.xdclass&quot;</span>);</span><br><span class="line"> <span class="comment">//⾥⾯完成初始化操作，核⼼⽅法</span></span><br><span class="line"> context.refresh();</span><br><span class="line"><span class="type">VideoService</span> <span class="variable">videoService</span> <span class="operator">=</span> (VideoService)</span><br><span class="line">context.getBean(<span class="string">&quot;videoService&quot;</span>);</span><br><span class="line"> videoService.findById(<span class="number">2</span>);</span><br><span class="line"> <span class="type">Video</span> <span class="variable">video</span> <span class="operator">=</span> (Video) context.getBean(<span class="string">&quot;video&quot;</span>);</span><br><span class="line"> video.init();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/06/Spring/" data-id="cl1muz31d0000pguo9yr78mdd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/04/06/hello-world/" class="article-date">
-  <time datetime="2022-04-06T00:36:35.159Z" itemprop="datePublished">2022-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          SpringBoot
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/06/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2022/04/06/Spring/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/06/hello-world/" data-id="cl1mutb8c0000r0uo9js9dwyt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
