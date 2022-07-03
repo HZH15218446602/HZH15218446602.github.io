@@ -7,15 +7,15 @@
   
   <title>SpringBoot | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SpringBootSpringBoot项目的搭建：在线创建 ：https:&#x2F;&#x2F;start.spring.io&#x2F; 步骤： 打开网站。选择Maven project。选择java。选择SpringBoot版本。填写Group和Artifact。选择打包类型为jar。选择JDK版本为8。添加Spring Web依赖。 创建出来带有启动类和application.yml。 SpringBoot开发JSO">
+  <meta name="description" content="SpringBootSpringBoot项目的搭建：在线创建 ：https:&#x2F;&#x2F;start.spring.io&#x2F; 步骤： 打开网站。 选择Maven project。 选择java。 选择SpringBoot版本。 填写Group和Artifact。 选择打包类型为jar。 选择JDK版本为8。 添加Spring Web依赖。 创建出来带有启动类和application.yml。 SpringBo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot">
 <meta property="og:url" content="http://example.com/2022/04/06/SpringBoot/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="SpringBootSpringBoot项目的搭建：在线创建 ：https:&#x2F;&#x2F;start.spring.io&#x2F; 步骤： 打开网站。选择Maven project。选择java。选择SpringBoot版本。填写Group和Artifact。选择打包类型为jar。选择JDK版本为8。添加Spring Web依赖。 创建出来带有启动类和application.yml。 SpringBoot开发JSO">
+<meta property="og:description" content="SpringBootSpringBoot项目的搭建：在线创建 ：https:&#x2F;&#x2F;start.spring.io&#x2F; 步骤： 打开网站。 选择Maven project。 选择java。 选择SpringBoot版本。 填写Group和Artifact。 选择打包类型为jar。 选择JDK版本为8。 添加Spring Web依赖。 创建出来带有启动类和application.yml。 SpringBo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-04-06T00:53:45.000Z">
-<meta property="article:modified_time" content="2022-04-06T00:54:52.388Z">
+<meta property="article:modified_time" content="2022-07-03T15:06:07.615Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -90,19 +90,32 @@
       
         <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><h2 id="SpringBoot项目的搭建："><a href="#SpringBoot项目的搭建：" class="headerlink" title="SpringBoot项目的搭建："></a>SpringBoot项目的搭建：</h2><p>在线创建 ：<a target="_blank" rel="noopener" href="https://start.spring.io/">https://start.spring.io/</a></p>
 <p>步骤：</p>
-<p>打开网站。<br>选择Maven project。<br>选择java。<br>选择SpringBoot版本。<br>填写Group和Artifact。<br>选择打包类型为jar。<br>选择JDK版本为8。<br>添加Spring Web依赖。</p>
+<p>打开网站。</p>
+<p>选择Maven project。</p>
+<p>选择java。</p>
+<p>选择SpringBoot版本。</p>
+<p>填写Group和Artifact。</p>
+<p>选择打包类型为jar。</p>
+<p>选择JDK版本为8。</p>
+<p>添加Spring Web依赖。</p>
 <p>创建出来带有启动类和application.yml。</p>
-<h2 id="SpringBoot开发JSON接口："><a href="#SpringBoot开发JSON接口：" class="headerlink" title="SpringBoot开发JSON接口："></a>SpringBoot开发JSON接口：</h2><p>步骤：</p>
-<p>在controller包的Videocontroller类。<br>类上加@RestController注解和@RequestMapping注解。<br>类中定义一个list方法，由@RequestMapping注解换成@GetMapping注解。<br>而且需要调用service包的service接口的实现类，所以定义一个成员变量并且在这个成员变量上加上@Autowired注解。<br>返回数据。</p>
+<h2 id="SpringBoot开发JSON接口"><a href="#SpringBoot开发JSON接口" class="headerlink" title="SpringBoot开发JSON接口"></a>SpringBoot开发JSON接口</h2><p>步骤：<br>创建controller包service包dao包domain包utils包并且创建好对应的类与接口。<br>在controller包的Videocontroller类。<br>类上加@RestController注解和@RequestMapping注解。<br>类中定义一个list方法，由@RequestMapping注解换成@GetMapping注解。<br>而且需要调用service包的service接口的实现类，所以定义一个成员变量并且在这个成员变量上加上@Autowired注解。<br>返回数据。</p>
 <p>在service包的service接口，写上方法体。<br>在service包的service接口的实现类，写上方法体实现并且在类上需要加上@Service。而且需要调用dao包的dao类，所以定义一个成员变量<br>并且在这个成员变量上加上@Autowired注解。</p>
 <p>在dao包的dao类，写上方法并且在类上需要加上@Component。</p>
-<p>应用：访问路径为<a target="_blank" rel="noopener" href="http://localhost:8080/controller%E7%B1%BB%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84/%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84%E3%80%82">http://localhost:8080/controller类上的RequestMapping括号内的/类中方法上的RequestMapping括号内的。</a></p>
-<h2 id="SpringBoot的静态文件："><a href="#SpringBoot的静态文件：" class="headerlink" title="SpringBoot的静态文件："></a>SpringBoot的静态文件：</h2><p>步骤：</p>
-<p>在resource下创建文件并且创建对应的html。<br>这些文件的资源有访问权限。<br>在application.properties设置文件的资源访问权限spring.resources.static-locations。rces.static-locations = classpath:/METAINF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/。</p>
-<p>应用：访问静态文件只需要<a target="_blank" rel="noopener" href="http://localhost:8080/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0.html%E3%80%82">http://localhost:8080/静态文件名称.html。</a><br>如果有放子目录，<a target="_blank" rel="noopener" href="http://localhost:8080/%E5%AD%90%E7%9B%AE%E5%BD%95/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0.html%E3%80%82">http://localhost:8080/子目录/静态文件名称.html。</a></p>
-<h2 id="SpringBoot的实体类与配置文件映射："><a href="#SpringBoot的实体类与配置文件映射：" class="headerlink" title="SpringBoot的实体类与配置文件映射："></a>SpringBoot的实体类与配置文件映射：</h2><p>步骤：</p>
-<p>新建一个配置文件pay.properties。<br>在config包下新建一个WXconfig配置类，类上加上@Configuration和@PropertySource(value=”classpath:pay.properties”)注解，在成员变量上加上@Value(“${配置文件的key}”)注解。<br>在controller包下新建一个TestController类,然后在类中需要用到就直接@Autowired注入WXconfig类的对象，获取成员变量与值。,然后前端请求就能拿到。</p>
-<h2 id="SpringBoot的全局异常："><a href="#SpringBoot的全局异常：" class="headerlink" title="SpringBoot的全局异常："></a>SpringBoot的全局异常：</h2><p>步骤：</p>
+<p>应用：访问路径为<a target="_blank" rel="noopener" href="http://localhost:8080/controller%E7%B1%BB%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84/%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E4%B8%8A%E7%9A%84RequestMapping%E6%8B%AC%E5%8F%B7%E5%86%85%E7%9A%84%E3%80%82">http://localhost:8080/controller类上的RequestMapping括号内的/类中方法上的RequestMapping括号内的。</a><br>注意：<br>@RestController注解。将数据自动序列化为json数据。<br>return ⼀个POJO对象（不能返回字符串）。不能返回基本数据类型和字符串。返回map,list,自定义User类型。</p>
+<p>注意：<br>在post请求中，前端传递的数据是表单提交的，对应的Controller的方法使用的是形式参数接受。<br>在post请求中，前端传递的数据是表单提交的，对应的Controller的方法使用的是对象接受。<br>在post请求中，前端传递的数据是json数据，数据中含有对象或者数组，那么对应的Controller的方法使用的是对象接受的而且还必须要在参数前加上注@RequestBody。json数据有对象和json数据有数组都需要。</p>
+<h2 id="SpringBoot常用注解"><a href="#SpringBoot常用注解" class="headerlink" title="SpringBoot常用注解"></a>SpringBoot常用注解</h2><p>@RestController 作⽤：⽤于标记这个类是⼀个控制器，返回JSON数据的时候使⽤，如果使⽤这个注解，则接⼝返回数据会被序列化为JSON</p>
+<p>@RequestMapping/@GetMapping/@PostMapping/@PutMapping/@DeleteMapping<br> 作⽤：路由映射，⽤于类上做1级路径；⽤于某个⽅法上做⼦路径</p>
+<p>@SpringBootApplication 作⽤: ⽤于标记是SringBoot应⽤，⾥⾯包含多个⼦注解。</p>
+<p>@JsonIgnore：指定字段不返回</p>
+<p>@JsonFormat(pattern=”yyyy-MM-ddhh:mm:ss”,locale=”zh”,timezone=”GMT+8”)：指定⽇期格式：</p>
+<p>@JsonInclude(Include.NON_NULL)：空字段不返回</p>
+<p>@JsonProperty：指定别名</p>
+<h2 id="SpringBoot的实体类与配置文件映射"><a href="#SpringBoot的实体类与配置文件映射" class="headerlink" title="SpringBoot的实体类与配置文件映射"></a>SpringBoot的实体类与配置文件映射</h2><p>步骤：</p>
+<p>新建一个配置文件pay.properties。</p>
+<p>在config包下新建一个WXconfig配置类，类上加上@Configuration和@PropertySource(value=”classpath:pay.properties”)注解，在成员变量上加上@Value(“${配置文件的key}”)注解。</p>
+<p>在controller包下新建一个TestController类,然后在类中需要用到就直接@Autowired注入WXconfig类的对象，获取成员变量与值。,然后前端请求就能拿到。</p>
+<h2 id="SpringBoot的全局异常"><a href="#SpringBoot的全局异常" class="headerlink" title="SpringBoot的全局异常"></a>SpringBoot的全局异常</h2><p>步骤：</p>
 <p>在handler包下创建一个CustomExtHandler类，类上加上@RestControllerAdvice注解，类中定义一个方法handlerException，方法上加上@ExceptionHandler(value=Exception.class)注解。</p>
 <h2 id="SpringBoot的过滤器："><a href="#SpringBoot的过滤器：" class="headerlink" title="SpringBoot的过滤器："></a>SpringBoot的过滤器：</h2><p>步骤：</p>
 <p>在启动类加上 @ServletComponentScan注解。<br>在filter包新建LoginFilter类实现Filter接口，重写init、doFilter、destroy方法，类上加上@WebFilter 注解，@WebFilter 注解括号内配置拦截路径以及名称。</p>
