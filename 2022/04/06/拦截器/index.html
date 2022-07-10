@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>拦截器 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556&#x2F;&#x2F;1.定义拦截器实现HandlerInterceptorpublic class LoginInterceptor implements HandlerInterceptor &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拦截器">
+<meta property="og:url" content="http://example.com/2022/04/06/%E6%8B%A6%E6%88%AA%E5%99%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556&#x2F;&#x2F;1.定义拦截器实现HandlerInterceptorpublic class LoginInterceptor implements HandlerInterceptor &amp;#123;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-06T00:53:45.000Z">
+<meta property="article:modified_time" content="2022-07-10T06:20:49.074Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-拦截器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/%E6%8B%A6%E6%88%AA%E5%99%A8/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      拦截器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.定义拦截器实现HandlerInterceptor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 进入到controller之前的方法，相当于前置通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">accessToken</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);<span class="comment">//2.第一种情况，请求头带着token，所以获取token</span></span><br><span class="line">            <span class="keyword">if</span> (accessToken == <span class="literal">null</span>) &#123;</span><br><span class="line">                accessToken = request.getParameter(<span class="string">&quot;token&quot;</span>);<span class="comment">//3.第二种情况，参数带着token,所以获取token</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(accessToken)) &#123;<span class="comment">//4.token不为空</span></span><br><span class="line">                <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> JWTUtils.checkJWT(accessToken);<span class="comment">//5.解密token</span></span><br><span class="line">                <span class="keyword">if</span> (claims == <span class="literal">null</span>) &#123;<span class="comment">//6.判断是否有token</span></span><br><span class="line">                    <span class="comment">//告诉登录过期，重新登录</span></span><br><span class="line">                    sendJsonMessage(response, JsonData.buildError(<span class="string">&quot;登录过期，重新登录&quot;</span>));</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> (Integer) claims.get(<span class="string">&quot;id&quot;</span>);<span class="comment">//7.获取用户的id</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) claims.get(<span class="string">&quot;name&quot;</span>);<span class="comment">//8.获取用户的名称</span></span><br><span class="line"></span><br><span class="line">                request.setAttribute(<span class="string">&quot;user_id&quot;</span>, id);<span class="comment">//9.再把用户的id放到会话中</span></span><br><span class="line">                request.setAttribute(<span class="string">&quot;name&quot;</span>, name);<span class="comment">//10.再把用户的名称放到会话中</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;&#125;</span><br><span class="line"></span><br><span class="line">        sendJsonMessage(response, JsonData.buildError(<span class="string">&quot;登录过期，重新登录&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 响应json数据给前端</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> obj</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sendJsonMessage</span><span class="params">(HttpServletResponse response, Object obj)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">ObjectMapper</span> <span class="variable">objectMapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();<span class="comment">//11.因为参数obj是json,所以将json序列化字符串</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;application/json; charset=utf-8&quot;</span>);<span class="comment">//12.设置响应类型</span></span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">writer</span> <span class="operator">=</span> response.getWriter();<span class="comment">//13.定义写的操作</span></span><br><span class="line">            writer.print(objectMapper.writeValueAsString(obj));<span class="comment">//14.写出字符串</span></span><br><span class="line">            writer.close();<span class="comment">//15.关闭流了</span></span><br><span class="line">            response.flushBuffer();<span class="comment">//16.刷新缓存</span></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//17.拦截器配置的</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//18.生成拦截器类的对象</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    LoginInterceptor <span class="title function_">loginInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginInterceptor</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line"></span><br><span class="line">        registry.addInterceptor(loginInterceptor()).addPathPatterns(<span class="string">&quot;/api/v1/pri/*/*/**&quot;</span>)<span class="comment">//19.addInterceptor表示哪个拦截器addPathPatterns表示拦截哪些路径</span></span><br><span class="line">                <span class="comment">//不拦截哪些路径   斜杠一定要加</span></span><br><span class="line">                .excludePathPatterns(<span class="string">&quot;/api/v1/pri/user/login&quot;</span>,<span class="string">&quot;/api/v1/pri/user/register&quot;</span>);<span class="comment">//20.excludePathPatterns表示不拦截哪些路径</span></span><br><span class="line"></span><br><span class="line">        WebMvcConfigurer.<span class="built_in">super</span>.addInterceptors(registry);<span class="comment">//21.注册拦截器了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/%E6%8B%A6%E6%88%AA%E5%99%A8/" data-id="cl5dyz5x200053wuodaut4qku" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/06/%E4%BA%8B%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          事务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/04/06/SpringBoot/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringBoot</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/04/SSM%E6%95%B4%E5%90%88/">SSM整合</a>
+          </li>
+        
+          <li>
+            <a href="/2022/07/04/IDEA%E8%B0%83%E8%AF%95%E6%AD%A5%E9%AA%A4/">IDEA调试步骤</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/Guava%E7%BC%93%E5%AD%98/">Guava缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/">SpringBoot跨域配置</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/06/token/">Token</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -64,191 +64,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Guava缓存" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SSM整合" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/07/09/Guava%E7%BC%93%E5%AD%98/" class="article-date">
-  <time datetime="2022-07-09T14:15:46.968Z" itemprop="datePublished">2022-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.缓存类</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseCache</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.写成员变量</span></span><br><span class="line">    <span class="keyword">private</span> Cache&lt;String,Object&gt; tenMinuteCache = CacheBuilder.newBuilder()<span class="comment">//3.新建缓存</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//4.设置缓存初始大小，应该合理设置，后续会扩容</span></span><br><span class="line">            .initialCapacity(<span class="number">10</span>)</span><br><span class="line">            <span class="comment">//5.缓存最大值</span></span><br><span class="line">            .maximumSize(<span class="number">100</span>)</span><br><span class="line">            <span class="comment">//6.缓存可以被多少个线程使用</span></span><br><span class="line">            .concurrencyLevel(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//7.缓存过期时间，写入后10分钟过期</span></span><br><span class="line">            .expireAfterWrite(<span class="number">600</span>,TimeUnit.SECONDS)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//8.统计缓存命中率</span></span><br><span class="line">            .recordStats()</span><br><span class="line">            <span class="comment">//9.构建缓存</span></span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Cache&lt;String,Object&gt; oneHourCache = CacheBuilder.newBuilder()</span><br><span class="line"></span><br><span class="line">            <span class="comment">//设置缓存初始大小，应该合理设置，后续会扩容</span></span><br><span class="line">            .initialCapacity(<span class="number">30</span>)</span><br><span class="line">            <span class="comment">//最大值</span></span><br><span class="line">            .maximumSize(<span class="number">100</span>)</span><br><span class="line">            <span class="comment">//并发数设置</span></span><br><span class="line">            .concurrencyLevel(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//缓存过期时间，写入后1小时 过期</span></span><br><span class="line">            .expireAfterWrite(<span class="number">3600</span>,TimeUnit.SECONDS)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//统计缓存命中率</span></span><br><span class="line">            .recordStats()</span><br><span class="line"></span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Cache&lt;String, Object&gt; <span class="title function_">getOneHourCache</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> oneHourCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setOneHourCache</span><span class="params">(Cache&lt;String, Object&gt; oneHourCache)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.oneHourCache = oneHourCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Cache&lt;String, Object&gt; <span class="title function_">getTenMinuteCache</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tenMinuteCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTenMinuteCache</span><span class="params">(Cache&lt;String, Object&gt; tenMinuteCache)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.tenMinuteCache = tenMinuteCache;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//10.建立缓存的key</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheKeyManager</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 首页轮播图缓存key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">INDEX_BANNER_KEY</span> <span class="operator">=</span> <span class="string">&quot;index:banner:list&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 首页视频列表缓存key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">INDEX_VIDEL_LIST</span> <span class="operator">=</span> <span class="string">&quot;index:video:list&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 视频详情缓存key, %s是视频id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">VIDEO_DETAIL</span> <span class="operator">=</span> <span class="string">&quot;video:detail:%s&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">想使用的话那就是使用了注入那个缓存类然后再对方法进行操作即可。。。。</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/09/Guava%E7%BC%93%E5%AD%98/" data-id="cl5dyz5wu00003wuo81ps4qsf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SpringBoot跨域配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/07/09/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/" class="article-date">
-  <time datetime="2022-07-09T14:15:46.968Z" itemprop="datePublished">2022-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.定义拦截器实现HandlerInterceptor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.设置请求头表示接受任意前端域名的请求,也可以指定域名</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, request.getHeader(<span class="string">&quot;origin&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.该字段可选，是个布尔值，表示是否可以携带cookie</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.允许跨域的方法咯</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.跨域的头信息</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//这里可以不加，但是其他语言开发的话记得处理options请求</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 非简单请求是对那种对服务器有特殊要求的请求，</span></span><br><span class="line"><span class="comment">         * 比如请求方式是PUT或者DELETE，或者Content-Type字段类型是application/json。</span></span><br><span class="line"><span class="comment">         * 都会在正式通信之前，增加一次HTTP请求，称之为预检。浏览器会先询问服务器，当前网页所在域名是否在服务器的许可名单之中，</span></span><br><span class="line"><span class="comment">         * 服务器允许之后，浏览器会发出正式的XMLHttpRequest请求</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">//6.预检处理，因为前端传过来是特殊请求方法或者json数据</span></span><br><span class="line">        <span class="keyword">if</span>(HttpMethod.OPTIONS.toString().equals(request.getMethod()))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//7.拦截器配置的</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="comment">//8.生成拦截器类的对象</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    CorsInterceptor <span class="title function_">corsInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsInterceptor</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 拦截全部路径，这个跨域需要放在最上面</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">//9.addInterceptor表示哪个拦截器addPathPatterns表示拦截哪些路径</span></span><br><span class="line">        registry.addInterceptor(corsInterceptor()).addPathPatterns(<span class="string">&quot;/**&quot;</span>);</span><br><span class="line">		<span class="comment">//10.注册拦截器了</span></span><br><span class="line">        WebMvcConfigurer.<span class="built_in">super</span>.addInterceptors(registry);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/09/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/" data-id="cl5dyz5wy00013wuo8m5895k9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-token" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/07/09/token/" class="article-date">
-  <time datetime="2022-07-09T14:15:46.968Z" itemprop="datePublished">2022-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JWTUtils</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1.过期时间，一周</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">EXPIRE</span> <span class="operator">=</span> <span class="number">60000</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>;</span><br><span class="line">    <span class="comment">//private  static final long EXPIRE = 1;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2.加密秘钥</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SECRET</span> <span class="operator">=</span> <span class="string">&quot;xdclass.net168&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3.令牌前缀</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOKEN_PREFIX</span> <span class="operator">=</span> <span class="string">&quot;xdclass&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 4.谁颁布的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SUBJECT</span> <span class="operator">=</span> <span class="string">&quot;xdclass&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 5.生成token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">geneJsonWebToken</span><span class="params">(User user)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> Jwts.builder().setSubject(SUBJECT)<span class="comment">//生成token并且说明是谁颁布的</span></span><br><span class="line">                .claim(<span class="string">&quot;head_img&quot;</span>,user.getHeadImg())<span class="comment">//自定义业务数据例如用户的图片</span></span><br><span class="line">                .claim(<span class="string">&quot;id&quot;</span>,user.getId())</span><br><span class="line">                .claim(<span class="string">&quot;name&quot;</span>,user.getName())</span><br><span class="line">                .setIssuedAt(<span class="keyword">new</span> <span class="title class_">Date</span>())<span class="comment">//设置什么时候颁布的</span></span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + EXPIRE))<span class="comment">//设置过期时间</span></span><br><span class="line">                .signWith(SignatureAlgorithm.HS256,SECRET).compact();<span class="comment">//设置加密方式和密钥</span></span><br><span class="line"></span><br><span class="line">        token = TOKEN_PREFIX + token;<span class="comment">//给token加前缀</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 6.校验token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Claims <span class="title function_">checkJWT</span><span class="params">(String token)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">final</span>  <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> Jwts.parser().setSigningKey(SECRET)<span class="comment">//通过密钥和加密方式进行解析</span></span><br><span class="line">             .parseClaimsJws(token.replace(TOKEN_PREFIX,<span class="string">&quot;&quot;</span>)).getBody();<span class="comment">//因为前面加了前缀，所以先把前缀干掉再进行获取token</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> claims;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/09/token/" data-id="cl5dyz5x000023wuof60idew9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-自定义异常" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/07/09/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/" class="article-date">
-  <time datetime="2022-07-09T14:15:46.968Z" itemprop="datePublished">2022-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.自定义异常类继承RuntimeException</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">XDException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">XDException</span><span class="params">(Integer code, String msg)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">        <span class="built_in">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCode</span><span class="params">(Integer code)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getMsg</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMsg</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2.自定义异常处理类</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomExceptionHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//7.定义异常日志</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(CustomExceptionHandler.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = Exception.class)</span><span class="comment">//3.捕捉哪些异常</span></span><br><span class="line">    <span class="meta">@ResponseBody</span><span class="comment">//4.响应数据给前端</span></span><br><span class="line">    <span class="keyword">public</span> JsonData <span class="title function_">handle</span><span class="params">(Exception e)</span>&#123;</span><br><span class="line">        <span class="comment">//8.打印异常日志</span></span><br><span class="line">        logger.error(<span class="string">&quot;[ 系统异常 ]&#123;&#125;&quot;</span>,e.getMessage());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( e <span class="keyword">instanceof</span> XDException )&#123;<span class="comment">//5.这是哪个异常，是运行异常还是啥异常</span></span><br><span class="line"></span><br><span class="line">            <span class="type">XDException</span> <span class="variable">xdException</span> <span class="operator">=</span> (XDException) e;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> JsonData.buildError(xdException.getCode(),xdException.getMsg());</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;<span class="comment">//6.除了运行异常还是啥异常</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> JsonData.buildError(<span class="string">&quot;全局异常，未知错误&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/09/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/" data-id="cl5dyz5x100033wuo786hdr2f" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/07/09/%E4%BA%8B%E5%8A%A1/" class="article-date">
-  <time datetime="2022-07-09T14:15:46.968Z" itemprop="datePublished">2022-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在启动类上加上 <span class="meta">@EnableTransactionManagement</span>注解。</span><br><span class="line">在VideoServiceImpl类的save方法加上<span class="meta">@Transactional</span>注解。</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/09/%E4%BA%8B%E5%8A%A1/" data-id="cl5dyz5x100043wuo6hdq8o0m" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-拦截器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/07/09/%E6%8B%A6%E6%88%AA%E5%99%A8/" class="article-date">
-  <time datetime="2022-07-09T14:15:46.968Z" itemprop="datePublished">2022-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.定义拦截器实现HandlerInterceptor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 进入到controller之前的方法，相当于前置通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">accessToken</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);<span class="comment">//2.第一种情况，请求头带着token，所以获取token</span></span><br><span class="line">            <span class="keyword">if</span> (accessToken == <span class="literal">null</span>) &#123;</span><br><span class="line">                accessToken = request.getParameter(<span class="string">&quot;token&quot;</span>);<span class="comment">//3.第二种情况，参数带着token,所以获取token</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(accessToken)) &#123;<span class="comment">//4.token不为空</span></span><br><span class="line">                <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> JWTUtils.checkJWT(accessToken);<span class="comment">//5.解密token</span></span><br><span class="line">                <span class="keyword">if</span> (claims == <span class="literal">null</span>) &#123;<span class="comment">//6.判断是否有token</span></span><br><span class="line">                    <span class="comment">//告诉登录过期，重新登录</span></span><br><span class="line">                    sendJsonMessage(response, JsonData.buildError(<span class="string">&quot;登录过期，重新登录&quot;</span>));</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> (Integer) claims.get(<span class="string">&quot;id&quot;</span>);<span class="comment">//7.获取用户的id</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) claims.get(<span class="string">&quot;name&quot;</span>);<span class="comment">//8.获取用户的名称</span></span><br><span class="line"></span><br><span class="line">                request.setAttribute(<span class="string">&quot;user_id&quot;</span>, id);<span class="comment">//9.再把用户的id放到会话中</span></span><br><span class="line">                request.setAttribute(<span class="string">&quot;name&quot;</span>, name);<span class="comment">//10.再把用户的名称放到会话中</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;&#125;</span><br><span class="line"></span><br><span class="line">        sendJsonMessage(response, JsonData.buildError(<span class="string">&quot;登录过期，重新登录&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 响应json数据给前端</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> obj</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sendJsonMessage</span><span class="params">(HttpServletResponse response, Object obj)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">ObjectMapper</span> <span class="variable">objectMapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();<span class="comment">//11.因为参数obj是json,所以将json序列化字符串</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;application/json; charset=utf-8&quot;</span>);<span class="comment">//12.设置响应类型</span></span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">writer</span> <span class="operator">=</span> response.getWriter();<span class="comment">//13.定义写的操作</span></span><br><span class="line">            writer.print(objectMapper.writeValueAsString(obj));<span class="comment">//14.写出字符串</span></span><br><span class="line">            writer.close();<span class="comment">//15.关闭流了</span></span><br><span class="line">            response.flushBuffer();<span class="comment">//16.刷新缓存</span></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//17.拦截器配置的</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//18.生成拦截器类的对象</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    LoginInterceptor <span class="title function_">loginInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginInterceptor</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line"></span><br><span class="line">        registry.addInterceptor(loginInterceptor()).addPathPatterns(<span class="string">&quot;/api/v1/pri/*/*/**&quot;</span>)<span class="comment">//19.addInterceptor表示哪个拦截器addPathPatterns表示拦截哪些路径</span></span><br><span class="line">                <span class="comment">//不拦截哪些路径   斜杠一定要加</span></span><br><span class="line">                .excludePathPatterns(<span class="string">&quot;/api/v1/pri/user/login&quot;</span>,<span class="string">&quot;/api/v1/pri/user/register&quot;</span>);<span class="comment">//20.excludePathPatterns表示不拦截哪些路径</span></span><br><span class="line"></span><br><span class="line">        WebMvcConfigurer.<span class="built_in">super</span>.addInterceptors(registry);<span class="comment">//21.注册拦截器了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/09/%E6%8B%A6%E6%88%AA%E5%99%A8/" data-id="cl5dyz5x200053wuodaut4qku" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-4.SSM整合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/07/04/4.SSM%E6%95%B4%E5%90%88/" class="article-date">
+    <a href="/2022/07/04/SSM%E6%95%B4%E5%90%88/" class="article-date">
   <time datetime="2022-07-04T00:53:45.000Z" itemprop="datePublished">2022-07-04</time>
 </a>
     
@@ -260,7 +78,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/04/4.SSM%E6%95%B4%E5%90%88/">SSM整合</a>
+      <a class="article-title" href="/2022/07/04/SSM%E6%95%B4%E5%90%88/">SSM整合</a>
     </h1>
   
 
@@ -305,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/04/4.SSM%E6%95%B4%E5%90%88/" data-id="cl5dvnh9x0003awuo3owu6gsm" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/07/04/SSM%E6%95%B4%E5%90%88/" data-id="cl5exi0sg000124uo9a7keqnt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,9 +185,9 @@
 
 
   
-    <article id="post-1.SpringBoot" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Guava缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/04/06/1.SpringBoot/" class="article-date">
+    <a href="/2022/04/06/Guava%E7%BC%93%E5%AD%98/" class="article-date">
   <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
 </a>
     
@@ -381,7 +199,245 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/06/1.SpringBoot/">SpringBoot</a>
+      <a class="article-title" href="/2022/04/06/Guava%E7%BC%93%E5%AD%98/">Guava缓存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.缓存类</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseCache</span> &#123;</span><br><span class="line">    <span class="comment">//2.写成员变量</span></span><br><span class="line">    <span class="keyword">private</span> Cache&lt;String,Object&gt; tenMinuteCache = CacheBuilder.newBuilder()<span class="comment">//3.新建缓存</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//4.设置缓存初始大小，应该合理设置，后续会扩容</span></span><br><span class="line">            .initialCapacity(<span class="number">10</span>)</span><br><span class="line">            <span class="comment">//5.缓存最大值</span></span><br><span class="line">            .maximumSize(<span class="number">100</span>)</span><br><span class="line">            <span class="comment">//6.缓存可以被多少个线程使用</span></span><br><span class="line">            .concurrencyLevel(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//7.缓存过期时间，写入后10分钟过期</span></span><br><span class="line">            .expireAfterWrite(<span class="number">600</span>,TimeUnit.SECONDS)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//8.统计缓存命中率</span></span><br><span class="line">            .recordStats()</span><br><span class="line">            <span class="comment">//9.构建缓存</span></span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Cache&lt;String,Object&gt; oneHourCache = CacheBuilder.newBuilder()</span><br><span class="line"></span><br><span class="line">            <span class="comment">//设置缓存初始大小，应该合理设置，后续会扩容</span></span><br><span class="line">            .initialCapacity(<span class="number">30</span>)</span><br><span class="line">            <span class="comment">//最大值</span></span><br><span class="line">            .maximumSize(<span class="number">100</span>)</span><br><span class="line">            <span class="comment">//并发数设置</span></span><br><span class="line">            .concurrencyLevel(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//缓存过期时间，写入后1小时 过期</span></span><br><span class="line">            .expireAfterWrite(<span class="number">3600</span>,TimeUnit.SECONDS)</span><br><span class="line"></span><br><span class="line">            <span class="comment">//统计缓存命中率</span></span><br><span class="line">            .recordStats()</span><br><span class="line"></span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Cache&lt;String, Object&gt; <span class="title function_">getOneHourCache</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> oneHourCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setOneHourCache</span><span class="params">(Cache&lt;String, Object&gt; oneHourCache)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.oneHourCache = oneHourCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Cache&lt;String, Object&gt; <span class="title function_">getTenMinuteCache</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tenMinuteCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTenMinuteCache</span><span class="params">(Cache&lt;String, Object&gt; tenMinuteCache)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.tenMinuteCache = tenMinuteCache;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//10.建立缓存的key</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheKeyManager</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 首页轮播图缓存key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">INDEX_BANNER_KEY</span> <span class="operator">=</span> <span class="string">&quot;index:banner:list&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 首页视频列表缓存key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">INDEX_VIDEL_LIST</span> <span class="operator">=</span> <span class="string">&quot;index:video:list&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 视频详情缓存key, %s是视频id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">VIDEO_DETAIL</span> <span class="operator">=</span> <span class="string">&quot;video:detail:%s&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">想使用的话那就是使用了注入那个缓存类然后再对方法进行操作即可。。。。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/Guava%E7%BC%93%E5%AD%98/" data-id="cl5dyz5wu00003wuo81ps4qsf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SpringBoot跨域配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/06/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/">SpringBoot跨域配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.定义拦截器实现HandlerInterceptor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.设置请求头表示接受任意前端域名的请求,也可以指定域名</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, request.getHeader(<span class="string">&quot;origin&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.该字段可选，是个布尔值，表示是否可以携带cookie</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Credentials&quot;</span>, <span class="string">&quot;true&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.允许跨域的方法咯</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="string">&quot;GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.跨域的头信息</span></span><br><span class="line">        response.setHeader(<span class="string">&quot;Access-Control-Allow-Headers&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//这里可以不加，但是其他语言开发的话记得处理options请求</span></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 非简单请求是对那种对服务器有特殊要求的请求，</span></span><br><span class="line"><span class="comment">         * 比如请求方式是PUT或者DELETE，或者Content-Type字段类型是application/json。</span></span><br><span class="line"><span class="comment">         * 都会在正式通信之前，增加一次HTTP请求，称之为预检。浏览器会先询问服务器，当前网页所在域名是否在服务器的许可名单之中，</span></span><br><span class="line"><span class="comment">         * 服务器允许之后，浏览器会发出正式的XMLHttpRequest请求</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">//6.预检处理，因为前端传过来是特殊请求方法或者json数据</span></span><br><span class="line">        <span class="keyword">if</span>(HttpMethod.OPTIONS.toString().equals(request.getMethod()))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//7.拦截器配置的</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line">    <span class="comment">//8.生成拦截器类的对象</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    CorsInterceptor <span class="title function_">corsInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsInterceptor</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 拦截全部路径，这个跨域需要放在最上面</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">//9.addInterceptor表示哪个拦截器addPathPatterns表示拦截哪些路径</span></span><br><span class="line">        registry.addInterceptor(corsInterceptor()).addPathPatterns(<span class="string">&quot;/**&quot;</span>);</span><br><span class="line">		<span class="comment">//10.注册拦截器了</span></span><br><span class="line">        WebMvcConfigurer.<span class="built_in">super</span>.addInterceptors(registry);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/" data-id="cl5dyz5wy00013wuo8m5895k9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-token" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/token/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/06/token/">Token</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JWTUtils</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1.过期时间，一周</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">EXPIRE</span> <span class="operator">=</span> <span class="number">60000</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">7</span>;</span><br><span class="line">    <span class="comment">//private  static final long EXPIRE = 1;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2.加密秘钥</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SECRET</span> <span class="operator">=</span> <span class="string">&quot;xdclass.net168&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3.令牌前缀</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOKEN_PREFIX</span> <span class="operator">=</span> <span class="string">&quot;xdclass&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 4.谁颁布的</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SUBJECT</span> <span class="operator">=</span> <span class="string">&quot;xdclass&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 5.生成token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">geneJsonWebToken</span><span class="params">(User user)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> Jwts.builder().setSubject(SUBJECT)<span class="comment">//生成token并且说明是谁颁布的</span></span><br><span class="line">                .claim(<span class="string">&quot;head_img&quot;</span>,user.getHeadImg())<span class="comment">//自定义业务数据例如用户的图片</span></span><br><span class="line">                .claim(<span class="string">&quot;id&quot;</span>,user.getId())</span><br><span class="line">                .claim(<span class="string">&quot;name&quot;</span>,user.getName())</span><br><span class="line">                .setIssuedAt(<span class="keyword">new</span> <span class="title class_">Date</span>())<span class="comment">//设置什么时候颁布的</span></span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() + EXPIRE))<span class="comment">//设置过期时间</span></span><br><span class="line">                .signWith(SignatureAlgorithm.HS256,SECRET).compact();<span class="comment">//设置加密方式和密钥</span></span><br><span class="line"></span><br><span class="line">        token = TOKEN_PREFIX + token;<span class="comment">//给token加前缀</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 6.校验token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Claims <span class="title function_">checkJWT</span><span class="params">(String token)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">final</span>  <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> Jwts.parser().setSigningKey(SECRET)<span class="comment">//通过密钥和加密方式进行解析</span></span><br><span class="line">             .parseClaimsJws(token.replace(TOKEN_PREFIX,<span class="string">&quot;&quot;</span>)).getBody();<span class="comment">//因为前面加了前缀，所以先把前缀干掉再进行获取token</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> claims;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/token/" data-id="cl5dyz5x000023wuof60idew9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-自定义异常" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/06/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">自定义异常，</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.自定义异常类继承RuntimeException</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">XDException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">XDException</span><span class="params">(Integer code, String msg)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">        <span class="built_in">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Integer <span class="title function_">getCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCode</span><span class="params">(Integer code)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getMsg</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMsg</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2.自定义异常处理类</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomExceptionHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//7.定义异常日志</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LoggerFactory.getLogger(CustomExceptionHandler.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = Exception.class)</span><span class="comment">//3.捕捉哪些异常</span></span><br><span class="line">    <span class="meta">@ResponseBody</span><span class="comment">//4.响应数据给前端</span></span><br><span class="line">    <span class="keyword">public</span> JsonData <span class="title function_">handle</span><span class="params">(Exception e)</span>&#123;</span><br><span class="line">        <span class="comment">//8.打印异常日志</span></span><br><span class="line">        logger.error(<span class="string">&quot;[ 系统异常 ]&#123;&#125;&quot;</span>,e.getMessage());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( e <span class="keyword">instanceof</span> XDException )&#123;<span class="comment">//5.这是哪个异常，是运行异常还是啥异常</span></span><br><span class="line"></span><br><span class="line">            <span class="type">XDException</span> <span class="variable">xdException</span> <span class="operator">=</span> (XDException) e;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> JsonData.buildError(xdException.getCode(),xdException.getMsg());</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;<span class="comment">//6.除了运行异常还是啥异常</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> JsonData.buildError(<span class="string">&quot;全局异常，未知错误&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/" data-id="cl5dyz5x100033wuo786hdr2f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/%E4%BA%8B%E5%8A%A1/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/06/%E4%BA%8B%E5%8A%A1/">事务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在启动类上加上 <span class="meta">@EnableTransactionManagement</span>注解。</span><br><span class="line">在VideoServiceImpl类的save方法加上<span class="meta">@Transactional</span>注解。</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/%E4%BA%8B%E5%8A%A1/" data-id="cl5dyz5x100043wuo6hdq8o0m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-拦截器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/%E6%8B%A6%E6%88%AA%E5%99%A8/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/06/%E6%8B%A6%E6%88%AA%E5%99%A8/">拦截器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.定义拦截器实现HandlerInterceptor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoginInterceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInterceptor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 进入到controller之前的方法，相当于前置通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">accessToken</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);<span class="comment">//2.第一种情况，请求头带着token，所以获取token</span></span><br><span class="line">            <span class="keyword">if</span> (accessToken == <span class="literal">null</span>) &#123;</span><br><span class="line">                accessToken = request.getParameter(<span class="string">&quot;token&quot;</span>);<span class="comment">//3.第二种情况，参数带着token,所以获取token</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.isNotBlank(accessToken)) &#123;<span class="comment">//4.token不为空</span></span><br><span class="line">                <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> JWTUtils.checkJWT(accessToken);<span class="comment">//5.解密token</span></span><br><span class="line">                <span class="keyword">if</span> (claims == <span class="literal">null</span>) &#123;<span class="comment">//6.判断是否有token</span></span><br><span class="line">                    <span class="comment">//告诉登录过期，重新登录</span></span><br><span class="line">                    sendJsonMessage(response, JsonData.buildError(<span class="string">&quot;登录过期，重新登录&quot;</span>));</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> (Integer) claims.get(<span class="string">&quot;id&quot;</span>);<span class="comment">//7.获取用户的id</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) claims.get(<span class="string">&quot;name&quot;</span>);<span class="comment">//8.获取用户的名称</span></span><br><span class="line"></span><br><span class="line">                request.setAttribute(<span class="string">&quot;user_id&quot;</span>, id);<span class="comment">//9.再把用户的id放到会话中</span></span><br><span class="line">                request.setAttribute(<span class="string">&quot;name&quot;</span>, name);<span class="comment">//10.再把用户的名称放到会话中</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;&#125;</span><br><span class="line"></span><br><span class="line">        sendJsonMessage(response, JsonData.buildError(<span class="string">&quot;登录过期，重新登录&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 响应json数据给前端</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> obj</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">sendJsonMessage</span><span class="params">(HttpServletResponse response, Object obj)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">ObjectMapper</span> <span class="variable">objectMapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();<span class="comment">//11.因为参数obj是json,所以将json序列化字符串</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;application/json; charset=utf-8&quot;</span>);<span class="comment">//12.设置响应类型</span></span><br><span class="line">            <span class="type">PrintWriter</span> <span class="variable">writer</span> <span class="operator">=</span> response.getWriter();<span class="comment">//13.定义写的操作</span></span><br><span class="line">            writer.print(objectMapper.writeValueAsString(obj));<span class="comment">//14.写出字符串</span></span><br><span class="line">            writer.close();<span class="comment">//15.关闭流了</span></span><br><span class="line">            response.flushBuffer();<span class="comment">//16.刷新缓存</span></span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//17.拦截器配置的</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//18.生成拦截器类的对象</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    LoginInterceptor <span class="title function_">loginInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">LoginInterceptor</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line"></span><br><span class="line">        registry.addInterceptor(loginInterceptor()).addPathPatterns(<span class="string">&quot;/api/v1/pri/*/*/**&quot;</span>)<span class="comment">//19.addInterceptor表示哪个拦截器addPathPatterns表示拦截哪些路径</span></span><br><span class="line">                <span class="comment">//不拦截哪些路径   斜杠一定要加</span></span><br><span class="line">                .excludePathPatterns(<span class="string">&quot;/api/v1/pri/user/login&quot;</span>,<span class="string">&quot;/api/v1/pri/user/register&quot;</span>);<span class="comment">//20.excludePathPatterns表示不拦截哪些路径</span></span><br><span class="line"></span><br><span class="line">        WebMvcConfigurer.<span class="built_in">super</span>.addInterceptors(registry);<span class="comment">//21.注册拦截器了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/06/%E6%8B%A6%E6%88%AA%E5%99%A8/" data-id="cl5dyz5x200053wuodaut4qku" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SpringBoot" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/06/SpringBoot/" class="article-date">
+  <time datetime="2022-04-06T00:53:45.000Z" itemprop="datePublished">2022-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/06/SpringBoot/">SpringBoot</a>
     </h1>
   
 
@@ -437,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/06/1.SpringBoot/" data-id="cl5dvnh9o0000awuo6jsh2jom" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/04/06/SpringBoot/" data-id="cl5exi0sc000024uo3min5djo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,9 +503,9 @@
 
 
   
-    <article id="post-2.MyBatis" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-MyBatis" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/04/06/2.MyBatis/" class="article-date">
+    <a href="/2022/04/06/MyBatis/" class="article-date">
   <time datetime="2022-04-06T00:53:32.000Z" itemprop="datePublished">2022-04-06</time>
 </a>
     
@@ -461,7 +517,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/06/2.MyBatis/">MyBatis</a>
+      <a class="article-title" href="/2022/04/06/MyBatis/">MyBatis</a>
     </h1>
   
 
@@ -524,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/06/2.MyBatis/" data-id="cl5dvnh9t0001awuo72vx86da" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/04/06/MyBatis/" data-id="cl5exi0sh000324uoc4fvdokn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -570,23 +626,23 @@
       <ul>
         
           <li>
-            <a href="/2022/07/09/Guava%E7%BC%93%E5%AD%98/">(no title)</a>
+            <a href="/2022/07/04/SSM%E6%95%B4%E5%90%88/">SSM整合</a>
           </li>
         
           <li>
-            <a href="/2022/07/09/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/">(no title)</a>
+            <a href="/2022/07/04/IDEA%E8%B0%83%E8%AF%95%E6%AD%A5%E9%AA%A4/">IDEA调试步骤</a>
           </li>
         
           <li>
-            <a href="/2022/07/09/token/">(no title)</a>
+            <a href="/2022/04/06/Guava%E7%BC%93%E5%AD%98/">Guava缓存</a>
           </li>
         
           <li>
-            <a href="/2022/07/09/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">(no title)</a>
+            <a href="/2022/04/06/SpringBoot%E8%B7%A8%E5%9F%9F%E9%85%8D%E7%BD%AE/">SpringBoot跨域配置</a>
           </li>
         
           <li>
-            <a href="/2022/07/09/%E4%BA%8B%E5%8A%A1/">(no title)</a>
+            <a href="/2022/04/06/token/">Token</a>
           </li>
         
       </ul>
